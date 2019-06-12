@@ -25,6 +25,7 @@ public class Fighting {
 		System.out.print("Your Life Points : ");
 		int yourLife = scan.nextInt();
 		System.out.println();
+		Boolean runaway = false;
 		
 		scan.nextLine();
 		Random generator = new Random();
@@ -62,13 +63,23 @@ public class Fighting {
 				}
 			}
 			
-			System.out.println("Press Enter to continue. ");
-			scan.nextLine();
-		}while(yourLife>0 && monsterLife>0);
+			System.out.println("Press Enter to continue. Or type in 'run' to run away.");
+			String command = scan.nextLine();
+			
+			switch(command) {
+				case "run" : 
+					System.out.println("You ran away. you coward! -4 Life points. ");
+					yourLife-=4;
+					runaway = true;
+					break;
+				default : 
+			}
+			
+		}while(yourLife>0 && monsterLife>0 && !runaway);
 		
-		if(monsterLife>0)
+		if(yourLife <= 0)
 			System.out.println("You are dead. :-( ");
-		else
+		else if(monsterLife <= 0)
 			System.out.println("You won. The monster is dead. :-) ");
 		
 
